@@ -14,15 +14,49 @@
     </div>
   </header>
 
-  <section id="lists-container" class="lists-container" ng-controller="listsCtrl as listsCtrl">
+  <section id="lists-container" 
+            class="lists-container" 
+            ng-controller="listsCtrl as listsCtrl">
     <div class="row">
       
       <section class="list list-inline" ng-repeat="list in listsCtrl.lists" ng-controller="listCtrl as listCtrl">
         
         <h1>{{list.listName}}</h1>
 
-        <div class ='card' ng-repeat="card in listCtrl.getCards(list)">
-          {{card.description}}
+        <div class ="card" 
+              ng-repeat="card in listCtrl.getCards(list)" 
+              ng-controller="cardCtrl as cardCtrl">
+          
+          <div ng-if="!cardCtrl.isEditing">
+            
+            {{card.description}}
+            
+            <div ng-click="cardCtrl.editCard(card)" 
+                  class="edit-small edit-card hand">
+                  edit
+            </div>
+            
+            <a ng-click="cardCtrl.deleteCard(card)" 
+                class="hand remove-small remove-card">
+              <div class="remove remove-list">x</div>
+            </a>
+
+          </div>
+
+          <div ng-if="cardCtrl.isEditing">
+            <form ng-submit="cardCtrl.updateCard()">
+              <input type="text" 
+                      close-editing
+                      is-editing="cardCtrl.isEditing"
+                      ng-model="cardCtrl.editingCard.description"/>
+              
+              <select class="select-list" 
+                      ng-model="cardCtrl.editingCard.list_id" 
+                      ng-change="cardCtrl.updateCard()"
+                      ng-options="list.id as list.listName for list in listsCtrl.lists">
+              </select>
+            </form>
+          </div>
         </div>
 
         <a ng-click="listCtrl.removeList(list)" class="hand">
@@ -31,7 +65,10 @@
 
         <section class="new-card">
           <form ng-submit="listCtrl.createCard(list)">
-            <input type='text' ng-model='listCtrl.cardDescription' class='card-input' placeholder='Add New Card'/>
+            <input type="text" 
+                    ng-model="listCtrl.cardDescription" 
+                    class="card-input" 
+                    placeholder="Add New Card"/>
           </form>
         </section>
 
@@ -39,7 +76,9 @@
 
       <section class="list new-list list-inline">
         <form ng-submit="listsCtrl.addList()">
-          <input type="text" ng-model="listsCtrl.listName"/>
+          <input type="text" 
+                  ng-model="listsCtrl.listName" 
+                  placeholder="Add New List"/>
         </form>
       </section>
     </div>
@@ -54,5 +93,7 @@
   <script src="js/factories/cardFactory.js"></script>
   <script src="js/controllers/listsCtrl.js"></script>
   <script src="js/controllers/listCtrl.js"></script>
+  <script src="js/controllers/cardCtrl.js"></script>
+  <script src="js/directives/closeEditing.js"></script>
 </body>
 </html>

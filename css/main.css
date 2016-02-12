@@ -63,13 +63,11 @@ input{
 .remove{
     width: 15px;
     height: 15px;
-    // background: url( ../img/x.svg);
 }
 
 .remove-small{
     width: 10px;
     height: 10px;
-    // background: url( ../img/x_small.svg);
 }
 
 .remove-list{
@@ -104,28 +102,19 @@ input{
 .edit{
     width: 15px;
     height: 15px;
-    // background: url( ../img/pen_alt_stroke.svg);
 }
 
 .edit-small{
     width: 10px;
     height: 10px;
-    // background: url( ../img/pen_alt_stroke_small.svg);
 }
 
 .edit-card{
     display: block;
     position: absolute;
-    top: 3px;
-    right: 20px;
-}
-
-.edit:hover{
-    // background: url( ../img/pen_alt_fill.svg);
-}
-
-.edit_sm:hover{
-    // background: url( ../img/pen_alt_fill_small.svg);
+    top: 13px;
+    right: 35px;
+    font-size: 10px;
 }
 
 .card:hover{

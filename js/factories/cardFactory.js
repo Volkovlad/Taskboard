@@ -45,5 +45,15 @@ angular.module('app').factory('cardFactory', function () {
 		});
 	};
 
+	service.updateCard = function(editedCard){
+		var card = _.find(cards, {id:editedCard.id});
+		card.description = editedCard.description;
+		card.list_id = editedCard.list_id;
+	};
+
+	service.deleteCard = function(card){
+		_.pull(cards, card);
+	};
+
 	return service;
 });
